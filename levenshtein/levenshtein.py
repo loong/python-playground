@@ -4,14 +4,15 @@
 """
 
 import numpy as np
-
+import random
+import string
 def lev_dist(s, t):
     d = [[0 for _ in range(len(s)+1)] for _ in range(len(t)+1)]
 
     for i in range(len(t)+1):
-        d[i][0] = len(s)
+        d[i][0] = i
     for i in range(len(s)+1):
-        d[0][i] = len(t)
+        d[0][i] = i
 
     d[0][0] = 0
     
@@ -26,4 +27,15 @@ def lev_dist(s, t):
 
     return d[len(t)][len(s)]
 
-print lev_dist("kitten", "sitting")
+N = 500
+
+t1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
+t2 = t1[::-1]
+print lev_dist(t1, t2)
+
+t1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
+t2 = t1+"2"
+print lev_dist(t1, t2)
+
+print lev_dist("XGYXYXYX", "XYXYXYTX")
+print lev_dist("sitting", "kitten")
